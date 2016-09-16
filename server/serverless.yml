@@ -1,0 +1,86 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: weekly-pocket # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: python2.7
+  region: eu-central-1
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+
+# you can overwrite defaults here
+#defaults:
+#  stage: dev
+#  region: us-east-1
+
+# you can add packaging information here
+package:
+#  include:
+#    - include-me.js
+  exclude:
+     - node_modules
+#    - exclude-me.js
+#  artifact: my-service-code.zip
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: users/create
+          method: get
+          cors: true
+#      - s3: ${env.BUCKET}
+#      - schedule: rate(10 minutes)
+#      - sns: greeter-topic
+
+# you can add CloudFormation resource templates here
+resources:
+  Resources:
+    DnsCname:
+      Type: "AWS::Route53::RecordSetGroup"
+      Properties:
+        HostedZoneName: ruempler.eu.
+        RecordSets:
+          - Name: weekly2pocket.ruempler.eu
+            Type: CNAME
+            TTL: 900
+            ResourceRecords: 
+              - Fn::Join:
+                  - ""
+                  - - Ref: ApiGatewayRestApi
+                    - ".execute-api"
+                    - Ref: AWS::Region
+                    - ".us-east-1.amazonaws.com."
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"

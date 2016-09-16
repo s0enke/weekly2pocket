@@ -1,6 +1,7 @@
 import React, { PropTypes as T } from 'react'
 import { Jumbotron } from 'react-bootstrap'
 import styles from './styles.module.css'
+import {Link} from 'react-router'
 
 export class Container extends React.Component {
   static contextTypes = {
@@ -20,6 +21,7 @@ export class Container extends React.Component {
         <h2 className={styles.mainTitle}>
           <img src="https://cdn.auth0.com/styleguide/1.0.0/img/badge.svg" />
         </h2>
+        <p><Link to="/newsletter">newsletters</Link></p>
         {children}
       </Jumbotron>
     )

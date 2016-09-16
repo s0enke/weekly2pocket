@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Router } from 'react-router';
+import { Router, Link } from 'react-router';
 
 class App extends React.Component {
   static contextTypes = {
@@ -13,9 +13,12 @@ class App extends React.Component {
 
   get content() {
     return (
+      <div>
       <Router
         routes={this.props.routes}
-        history={this.props.history} />
+        history={this.props.history}>
+      </Router>
+      </div>
     )
   }
 

@@ -4,6 +4,7 @@ import AuthService from 'utils/AuthService'
 import Container from './Container'
 import Home from './Home/Home'
 import Login from './Login/Login'
+import Newsletter from './Newsletter/Newsletter'
 
 const auth = new AuthService(__AUTH0_CLIENT_ID__, __AUTH0_DOMAIN__);
 
@@ -19,6 +20,7 @@ export const makeMainRoutes = () => {
     <Route path="/" component={Container} auth={auth}>
       <IndexRedirect to="/home" />
       <Route path="home" component={Home} onEnter={requireAuth} />
+      <Route path="newsletter" component={Newsletter} onEnter={requireAuth} />
       <Route path="login" component={Login} />
       <Route path="access_token=:token" component={Login} /> //to prevent router errors
     </Route>

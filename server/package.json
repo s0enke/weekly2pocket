@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "serverless": "^1.0.0-rc.1"
+    "serverless": "^1.0.0-rc.1",
+    "serverless-client-s3": "/home/private/Projects/serverless-client-s3"
   }
 }

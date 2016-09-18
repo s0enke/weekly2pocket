@@ -64,7 +64,7 @@ resources:
             ForwardedValues:
               QueryString: false
             TargetOriginId: Origin
-            ViewerProtocolPolicy: "allow-all"
+            ViewerProtocolPolicy: "redirect-to-https"
           Enabled: true
           DefaultRootObject: "index.html"
           Aliases:
